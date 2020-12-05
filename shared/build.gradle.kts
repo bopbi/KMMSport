@@ -15,7 +15,11 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation(SqlDelight.runtime)
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -24,6 +28,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
+                implementation(SqlDelight.android)
                 implementation("com.google.android.material:material:1.2.1")
             }
         }
@@ -33,7 +38,11 @@ kotlin {
                 implementation("junit:junit:4.13")
             }
         }
-        val iosMain by getting
+        val iosMain by getting {
+            dependencies {
+                implementation(SqlDelight.native)
+            }
+        }
         val iosTest by getting
     }
 }
