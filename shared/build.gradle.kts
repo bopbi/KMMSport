@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("com.squareup.sqldelight")
+    id("kotlinx-serialization")
 }
 
 kotlin {
@@ -17,11 +19,18 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation("com.badoo.reaktive:reaktive:1.1.18")
+                implementation("com.badoo.reaktive:reaktive-annotations:1.1.18")
+                implementation("com.badoo.reaktive:coroutines-interop:1.1.18")
+                implementation(Serialization.core)
                 implementation(SqlDelight.runtime)
+                implementation(Ktor.core)
+                implementation(Ktor.clientSerialization)
             }
         }
         val commonTest by getting {
             dependencies {
+                implementation("com.badoo.reaktive:reaktive-testing:1.1.18")
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
@@ -29,6 +38,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(SqlDelight.android)
+                implementation(Ktor.android)
                 implementation("com.google.android.material:material:1.2.1")
             }
         }
@@ -41,6 +51,7 @@ kotlin {
         val iosMain by getting {
             dependencies {
                 implementation(SqlDelight.native)
+                implementation(Ktor.ios)
             }
         }
         val iosTest by getting
@@ -70,3 +81,10 @@ val packForXcode by tasks.creating(Sync::class) {
 }
 
 tasks.getByName("build").dependsOn(packForXcode)
+
+sqldelight {
+    database("SportDatabase") {
+        packageName = "com.bobbyprabowo.kmmsport.db"
+        sourceFolders = listOf("sqldelight")
+    }
+}

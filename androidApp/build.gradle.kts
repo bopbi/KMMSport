@@ -7,7 +7,8 @@ dependencies {
     implementation(project(":shared"))
     implementation("com.google.android.material:material:1.2.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("com.badoo.reaktive:reaktive:1.1.18")
 }
 
 android {
