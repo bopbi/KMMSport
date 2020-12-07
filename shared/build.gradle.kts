@@ -19,12 +19,19 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                // for ktor on ios
+	            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}") {
+                    version {
+                        strictly(Versions.kotlinCoroutines)
+                    }
+	            }
                 implementation("com.badoo.reaktive:reaktive:1.1.18")
                 implementation("com.badoo.reaktive:reaktive-annotations:1.1.18")
                 implementation("com.badoo.reaktive:coroutines-interop:1.1.18")
                 implementation(Serialization.core)
                 implementation(SqlDelight.runtime)
                 implementation(Ktor.core)
+								implementation(Ktor.json)
                 implementation(Ktor.clientSerialization)
             }
         }
