@@ -1,8 +1,8 @@
-package com.bobbyprabowo.kmmsport.shared.datasource
+package com.bobbyprabowo.kmmsport.shared.repository
 
 import com.bobbyprabowo.kmmsport.shared.schema.TeamSearchResult
 
-interface SportsAPI {
+interface SportsRepository {
 
     suspend fun searchTeam(keyword: String): TeamSearchResult
 }

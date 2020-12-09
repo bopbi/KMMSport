@@ -8,7 +8,8 @@ dependencies {
     implementation("com.google.android.material:material:1.2.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("com.badoo.reaktive:reaktive:1.1.18")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:1.4.1")
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
 }
 
 android {
@@ -24,5 +25,14 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }

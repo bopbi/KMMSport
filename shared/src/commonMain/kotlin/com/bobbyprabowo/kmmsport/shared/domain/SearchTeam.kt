@@ -1,11 +1,10 @@
 package com.bobbyprabowo.kmmsport.shared.domain
 
-import com.bobbyprabowo.kmmsport.shared.schema.Team
-import kotlinx.coroutines.flow.Flow
+import com.bobbyprabowo.kmmsport.shared.schema.TeamSearchResult
 
 interface SearchTeam {
 
-    fun execute(keyword: String): Flow<Team>
+    suspend fun execute(keyword: String): TeamSearchResult
 
-    fun execute(keyword: String, success: () -> Team, failed: () -> Throwable)
+    fun execute(keyword: String,  success: (TeamSearchResult) -> Unit, fail: (Throwable) -> Unit)
 }

@@ -7,7 +7,17 @@ plugins {
     id("kotlinx-serialization")
 }
 
+version = "1.0"
+
 kotlin {
+    val sdkName: String? = System.getenv("SDK_NAME")
+
+    val isiOSDevice = sdkName.orEmpty().startsWith("iphoneos")
+    if (isiOSDevice) {
+        iosArm64("iOS")
+    } else {
+        iosX64("iOS")
+    }
     android()
     ios {
         binaries {
@@ -25,19 +35,15 @@ kotlin {
                         strictly(Versions.kotlinCoroutines)
                     }
 	            }
-                implementation("com.badoo.reaktive:reaktive:1.1.18")
-                implementation("com.badoo.reaktive:reaktive-annotations:1.1.18")
-                implementation("com.badoo.reaktive:coroutines-interop:1.1.18")
                 implementation(Serialization.core)
                 implementation(SqlDelight.runtime)
                 implementation(Ktor.core)
-								implementation(Ktor.json)
+                implementation(Ktor.json)
                 implementation(Ktor.clientSerialization)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation("com.badoo.reaktive:reaktive-testing:1.1.18")
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
@@ -71,6 +77,8 @@ android {
     defaultConfig {
         minSdkVersion(24)
         targetSdkVersion(29)
+        versionCode = 1
+        versionName = "1.0"
     }
 }
 
